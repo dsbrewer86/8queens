@@ -1,64 +1,27 @@
-function checkDiagonal(board, newCoord) {
+// board:   array with n elements;
+//          each element will hold number of row containing queen;
+//
+// n:       number of queens left;
+//
+// totalCols: total number of columns;
+////////////////////////////////////////////////////////////////////////////////
 
-  let newHorizontal = getNumberFromLetter(newCoord[0]);
-  let newVertical = newCoord[1];
-  let newDifference = newHorizontal - newVertical;
-  console.log("newDiff: " + newDifference);
 
-  for (let i = 0; i < board.length; i++) {
-    let horizontal = board[i][0];
-    let vertical = board[i][1];
+function attacked(board) {
+  let last = board[board.length - 1];
 
-    horizontal = getNumberFromLetter(horizontal);
 
-    let difference = horizontal - vertical;
+  for (let i = 0; i < (board.length - 1); i++) {
 
-    console.log("diff: " + difference);
+    let rowDiff = Math.abs(last-board[i]);
+    let colDiff = Math.abs((board.length - 1) - i);
 
-    if (newDifference == difference) {
+    if (last == board[i]){
       return true;
     }
-
-  }
-  return false;
-}
-function checkHorandVert(board, newCoord) {
-  for (let i = 0; i < board.length; i++) {
-    if (board[i][0] == newCoord[0] || board[i][1] == newCoord[1]) {
+    else if (rowDiff == colDiff) {
       return true;
     }
-
   }
   return false;
-}
-function getNumberFromLetter(letter) {
-  switch(letter) {
-    case 'a':
-      return 1;
-    break;
-    case 'b':
-      return 2;
-    break;
-    case 'c':
-      return 3;
-    break;
-    case 'd':
-      return 4;
-    break;
-    case 'e':
-      return 5;
-    break;
-    case 'f':
-      return 6;
-    break;
-    case 'g':
-      return 7;
-    break;
-    case 'h':
-      return 8;
-    break;
-    default:
-      return 'error';
-
-  }
 }
