@@ -25,3 +25,25 @@ function attacked(board) {
   }
   return false;
 }
+
+
+function nextQueen(totalCols, n, board) {
+  board = board || [];
+  if (board.length == totalCols && !attacked(board)) {
+    return board;
+  }
+  if (n == 0) {
+    return board
+  }
+
+  for (let i = 0; i < totalCols; i++) {
+    board.push(i);
+
+    if (!attacked(board) && nextQueen(totalCols, n-1, board)) {
+
+      return board;
+    }
+    board.pop();
+  }
+  return null;
+}
